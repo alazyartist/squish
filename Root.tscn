@@ -15,5 +15,12 @@ script = ExtResource("1_6l6g2")
 position = Vector2(363, 392)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 149)
+position = Vector2(-381, 149)
+shape = SubResource("RectangleShape2D_vg267")
+
+[node name="Area2D2" type="StaticBody2D" parent="."]
+position = Vector2(363, 392)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(587, 149)
 shape = SubResource("RectangleShape2D_vg267")
