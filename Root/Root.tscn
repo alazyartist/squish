@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dtu4argbq1yci"]
 
 [ext_resource type="Script" path="res://Root/Root.gd" id="1_32ggw"]
-[ext_resource type="PackedScene" uid="uid://s0d83lmkg272" path="res://Squish/Squish.tscn" id="2_b2lbc"]
+[ext_resource type="PackedScene" uid="uid://d1rr3l5yg0sq5" path="res://Squish/Squish2.tscn" id="2_8gu7f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vg267"]
 size = Vector2(729, 214)
@@ -23,4 +23,4 @@ position = Vector2(363, 392)
 position = Vector2(587, 149)
 shape = SubResource("RectangleShape2D_vg267")
 
-[node name="Squish" parent="." instance=ExtResource("2_b2lbc")]
+[node name="Squish2" parent="." instance=ExtResource("2_8gu7f")]
