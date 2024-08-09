@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://s0d83lmkg272"]
+[gd_scene load_steps=6 format=3 uid="uid://s0d83lmkg272"]
 
 [ext_resource type="Script" path="res://Squish/Squish.gd" id="1_75fm2"]
 [ext_resource type="Script" path="res://Squish/RayCast2D.gd" id="2_xobmo"]
 [ext_resource type="Texture2D" uid="uid://cfc5tls55qaos" path="res://icon.svg" id="3_7iqoi"]
+[ext_resource type="Texture2D" uid="uid://rhxw1hkm7i1j" path="res://Squish/Bush3.png" id="4_1g2il"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wvxp5"]
 size = Vector2(11.5547, 11.5547)
@@ -46,7 +47,7 @@ lock_rotation = true
 [node name="Icon" type="Sprite2D" parent="Head"]
 position = Vector2(0, -98.5)
 scale = Vector2(0.226563, 0.226563)
-texture = ExtResource("3_7iqoi")
+texture = ExtResource("4_1g2il")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
 position = Vector2(0, -98.5)

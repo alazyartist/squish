@@ -58,7 +58,10 @@ func _physics_process(delta):
 	update_spring_visual()
 
 func perform_jump():
-	velocity.y = jump_force
+	#velocity.y = jump_force
+	var lm = get_last_motion() if get_last_motion() else Vector2(1,1)
+	velocity.x = -lm[0] * jump_force
+	velocity.y = lm[1]* jump_force
 	max_compression = 0.99 
 	
 func update_spring_visual():
