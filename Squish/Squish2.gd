@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+const JUMP_VELOCITY = -300.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -26,15 +26,10 @@ func _ready():
 func _physics_process(delta):
 	var collison = move_and_collide(velocity * delta)
 	if collison:
+		print('collision')
 		velocity -= velocity*0.2
 		velocity = velocity.bounce(collison.get_normal()) 
-	if is_compressing:
-		print("Compressing")
-		print(compression)
-	if is_jumping:
-		print("is_jumping")
-		print(compression)
-		print(max_compression)
+			
 	if is_compressing:
 		# Compress the spring
 		compression += compression_speed * delta
@@ -55,35 +50,32 @@ func _physics_process(delta):
 			velocity.y += gravity * delta
 
 	# Move the character
-	#move_and_slide()
+	move_and_slide()
 
 	# Update the spring's visual representation
 	update_spring_visual()
 
 func perform_jump():
-	velocity.y = jump_force
-	#var lm = get_last_motion() if get_last_motion() else Vector2(1,1)
-	#var lm = get_last_slide_collision().get_collider_velocity()
-	#velocity.x = -lm[0] * jump_force
-	#velocity.y = lm[1]* jump_force
-	
-	max_compression = 0.99 
+	if is_on_floor():
+		velocity.y = jump_force
+		max_compression = 0.9 
 	
 func update_spring_visual():
 	# Scale the sprite based on the compression
 	$Icon.scale = Vector2(rest_height+compression/2,rest_height - compression)
 
 func _input(event):
-	if event.is_action_released("ui_select"):
-		print(1+(1-compression))
-		jump_force = JUMP_VELOCITY * (1+compression)
-		max_compression = compression if not compression == 0 or compression >=1.0 else 0.8
-		is_decompressing = true
 
-	if event.is_action_pressed("ui_select") and is_on_floor() and not is_compressing and not is_jumping:
+	if event.is_action_pressed("ui_select") and not is_compressing and not is_jumping:
 		is_compressing = true
 	var direction = Input.get_axis("ui_left", "ui_right")
 	if direction:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+
+	if event.is_action_released("ui_select"):
+		print(1+compression)
+		jump_force = JUMP_VELOCITY * (1+compression)
+		max_compression = compression if not compression == 0 or compression >=1.0 else 0.8
+		is_decompressing = true
