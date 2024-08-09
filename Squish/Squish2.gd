@@ -25,11 +25,11 @@ func _ready():
 
 func _physics_process(delta):
 	var collison = move_and_collide(velocity * delta)
-	if collison:
+	if collison and is_on_floor():
 		print('collision')
 		velocity -= velocity*0.2
 		velocity = velocity.bounce(collison.get_normal()) 
-			
+		
 	if is_compressing:
 		# Compress the spring
 		compression += compression_speed * delta
@@ -48,10 +48,10 @@ func _physics_process(delta):
 		# Apply gravity if not on the floor
 		if not is_on_floor():
 			velocity.y += gravity * delta
-
-	# Move the character
+	
 	move_and_slide()
-
+	
+			
 	# Update the spring's visual representation
 	update_spring_visual()
 
@@ -63,10 +63,12 @@ func perform_jump():
 func update_spring_visual():
 	# Scale the sprite based on the compression
 	$Icon.scale = Vector2(rest_height+compression/2,rest_height - compression)
-
+	
 func _input(event):
 
 	if event.is_action_pressed("ui_select") and not is_compressing and not is_jumping:
+		if not is_on_floor:
+			velocity.y -= compression * JUMP_VELOCITY
 		is_compressing = true
 	var direction = Input.get_axis("ui_left", "ui_right")
 	if direction:
