@@ -11,9 +11,16 @@ config_version=5
 [application]
 
 config/name="Squish"
-run/main_scene="res://Root.tscn"
+run/main_scene="res://Root/Root.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[file_customization]
+
+folder_colors={
+"res://Root/": "gray",
+"res://Squish/": "teal"
+}
 
 [input]
 

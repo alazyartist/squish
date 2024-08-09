@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var new_squish:PackedScene = preload("res://Squish.tscn")
+@export var new_squish:PackedScene = preload("res://Squish/Squish.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 		
