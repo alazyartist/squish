@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -300.0
+const SPEED = 400.0
+const JUMP_VELOCITY = -250.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -25,9 +25,12 @@ func _ready():
 
 func _physics_process(delta):
 	var collison = move_and_collide(velocity * delta)
-	if collison and is_on_floor():
+	if collison:
 		print('collision')
-		velocity -= velocity*0.2
+		print(SPEED/velocity.y)
+		compression = SPEED/velocity.y
+		is_decompressing = true
+		velocity += velocity*0.2
 		velocity = velocity.bounce(collison.get_normal()) 
 		
 	if is_compressing:
@@ -39,7 +42,7 @@ func _physics_process(delta):
 			#is_jumping = true
 	elif is_decompressing:
 		# Decompress the spring
-		compression -= compression_speed * delta
+		compression -= (compression_speed ** max_compression) * delta
 		if compression <= 0:
 			compression = 0
 			is_decompressing = false
@@ -63,6 +66,7 @@ func perform_jump():
 func update_spring_visual():
 	# Scale the sprite based on the compression
 	$Icon.scale = Vector2(rest_height+compression/2,rest_height - compression)
+	$Sprite.scale = Vector2(rest_height+compression/2,rest_height - compression)
 	
 func _input(event):
 
@@ -81,3 +85,13 @@ func _input(event):
 		jump_force = JUMP_VELOCITY * (1+compression)
 		max_compression = compression if not compression == 0 or compression >=1.0 else 0.8
 		is_decompressing = true
+
+
+
+func _on_area_2d_body_entered(body):
+	print(body.name)
+	if(body.name == 'Squish'):
+		print('you won')
+		$YouWin.show()
+	pass # Replace with function body.
+

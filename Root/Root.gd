@@ -15,3 +15,5 @@ func _process(delta):
 		var squish = new_squish.instantiate()
 		add_child(squish)
 	pass
+
+
