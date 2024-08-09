@@ -24,7 +24,10 @@ func _ready():
 	pass
 
 func _physics_process(delta):
-		
+	var collison = move_and_collide(velocity * delta)
+	if collison:
+		velocity -= velocity*0.2
+		velocity = velocity.bounce(collison.get_normal()) 
 	if is_compressing:
 		print("Compressing")
 		print(compression)
@@ -52,16 +55,18 @@ func _physics_process(delta):
 			velocity.y += gravity * delta
 
 	# Move the character
-	move_and_slide()
+	#move_and_slide()
 
 	# Update the spring's visual representation
 	update_spring_visual()
 
 func perform_jump():
-	#velocity.y = jump_force
-	var lm = get_last_motion() if get_last_motion() else Vector2(1,1)
-	velocity.x = -lm[0] * jump_force
-	velocity.y = lm[1]* jump_force
+	velocity.y = jump_force
+	#var lm = get_last_motion() if get_last_motion() else Vector2(1,1)
+	#var lm = get_last_slide_collision().get_collider_velocity()
+	#velocity.x = -lm[0] * jump_force
+	#velocity.y = lm[1]* jump_force
+	
 	max_compression = 0.99 
 	
 func update_spring_visual():
