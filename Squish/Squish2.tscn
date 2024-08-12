@@ -1,16 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://d1rr3l5yg0sq5"]
+[gd_scene load_steps=8 format=3 uid="uid://d1rr3l5yg0sq5"]
 
 [ext_resource type="Script" path="res://Squish/Squish2.gd" id="1_6s111"]
 [ext_resource type="Texture2D" uid="uid://rhxw1hkm7i1j" path="res://Squish/Bush3.png" id="2_3bei0"]
-[ext_resource type="Texture2D" uid="uid://ch21mjsvxq3x7" path="res://Squish/Glockbase.png" id="3_wqtha"]
+[ext_resource type="Texture2D" uid="uid://bcieynp3576sc" path="res://Squish/squishbody.png" id="3_7i8va"]
 [ext_resource type="Script" path="res://Squish/Sprite.gd" id="4_w182m"]
 [ext_resource type="PackedScene" uid="uid://b20ypkxtipweo" path="res://you_win.tscn" id="5_xc71x"]
+[ext_resource type="Texture2D" uid="uid://d0gywy6a7op5i" path="res://Squish/squisheyes.png" id="6_ay3pj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qvrgj"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_wqtha")
+"texture": ExtResource("3_7i8va")
 }],
 "loop": true,
 "name": &"default",
@@ -48,6 +49,6 @@ script = ExtResource("4_w182m")
 [node name="YouWin" parent="." instance=ExtResource("5_xc71x")]
 visible = false
 
-[node name="Bush3" type="Sprite2D" parent="."]
-position = Vector2(-9, -26)
-texture = ExtResource("2_3bei0")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -26)
+texture = ExtResource("6_ay3pj")
