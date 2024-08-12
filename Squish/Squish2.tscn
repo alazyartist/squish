@@ -47,3 +47,7 @@ script = ExtResource("4_w182m")
 
 [node name="YouWin" parent="." instance=ExtResource("5_xc71x")]
 visible = false
+
+[node name="Bush3" type="Sprite2D" parent="."]
+position = Vector2(-9, -26)
+texture = ExtResource("2_3bei0")
