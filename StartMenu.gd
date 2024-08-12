@@ -3,6 +3,7 @@ extends CanvasLayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	get_tree().paused = true
 	pass # Replace with function body.
 
 
@@ -12,4 +13,7 @@ func _process(delta):
 
 
 func _on_start_pressed():
+	print('start pressed')
+	get_tree().paused = false
+	hide()
 	pass # Replace with function body.

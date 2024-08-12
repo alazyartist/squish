@@ -1,3 +1,87 @@
-[gd_scene format=3 uid="uid://drjoxu67frmt6"]
+[gd_scene load_steps=7 format=3 uid="uid://drjoxu67frmt6"]
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[ext_resource type="Texture2D" uid="uid://c118cox53xrjs" path="res://Logo.webp" id="1_3po57"]
+[ext_resource type="Script" path="res://StartMenu.gd" id="1_v8n7x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5jnus"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7qd8w"]
+bg_color = Color(0.0706082, 0.336493, 0.412039, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_svl0y"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.195779, 0.665619, 0.801863, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="Theme" id="Theme_f0duy"]
+/colors/Button = Color(0.153246, 0.80602, 0.795197, 1)
+Button/styles/focus = SubResource("StyleBoxFlat_5jnus")
+Button/styles/hover = SubResource("StyleBoxFlat_7qd8w")
+Button/styles/normal = SubResource("StyleBoxFlat_svl0y")
+Button/styles/pressed = SubResource("StyleBoxFlat_7qd8w")
+
+[node name="StartMenu" type="CanvasLayer"]
+process_mode = 2
+script = ExtResource("1_v8n7x")
+
+[node name="Container" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(1152, 648)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -324.0
+offset_top = -53.0
+offset_right = 324.0
+offset_bottom = 53.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Container"]
+layout_mode = 2
+texture = ExtResource("1_3po57")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="Container"]
+custom_minimum_size = Vector2(240, 140)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="CenterContainer" type="CenterContainer" parent="Container/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="HFlowContainer" type="HFlowContainer" parent="Container/MarginContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Container/MarginContainer/CenterContainer/HFlowContainer"]
+layout_mode = 2
+theme = SubResource("Theme_f0duy")
+theme_override_font_sizes/font_size = 37
+text = "Start Game"
+
+[connection signal="pressed" from="Container/MarginContainer/CenterContainer/HFlowContainer/Button" to="." method="_on_start_pressed"]

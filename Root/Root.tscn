@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dtu4argbq1yci"]
+[gd_scene load_steps=17 format=3 uid="uid://dtu4argbq1yci"]
 
 [ext_resource type="Script" path="res://Root/Root.gd" id="1_32ggw"]
 [ext_resource type="PackedScene" uid="uid://d1rr3l5yg0sq5" path="res://Squish/Squish2.tscn" id="2_8gu7f"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dlcsiggegnjmy" path="res://Assets/Resources/Trees/Tree.png" id="4_ry1d7"]
 [ext_resource type="Script" path="res://Root/AnimatedSprite2D.gd" id="5_61hal"]
 [ext_resource type="Script" path="res://Root/WinCondition.gd" id="6_pc423"]
+[ext_resource type="PackedScene" uid="uid://drjoxu67frmt6" path="res://StartMenu.tscn" id="8_iaup8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k2wot"]
 atlas = ExtResource("4_ry1d7")
@@ -118,5 +119,7 @@ script = ExtResource("6_pc423")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_j8evh")
+
+[node name="StartMenu" parent="." instance=ExtResource("8_iaup8")]
 
 [connection signal="body_entered" from="Area2D" to="Squish2" method="_on_area_2d_body_entered"]

@@ -10,6 +10,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed('ui_cancel'):
+		get_tree().paused = true
+		$StartMenu.show()
+		
+	if Input.is_action_just_pressed("one"):	
 		$Squish.queue_free()
 		await get_tree().create_timer(0.000001).timeout
 		var squish = new_squish.instantiate()
