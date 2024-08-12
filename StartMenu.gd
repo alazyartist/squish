@@ -1,9 +1,8 @@
-extends AnimatedSprite2D
+extends CanvasLayer
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	play('default')
 	pass # Replace with function body.
 
 
@@ -11,9 +10,6 @@ func _ready():
 func _process(delta):
 	pass
 
-func _input(event):
-	if event.is_action("left"):
-		flip_h = true
-	elif event.is_action("right"):
-		flip_h = false
-	
+
+func _on_start_pressed():
+	pass # Replace with function body.
