@@ -21,34 +21,31 @@ var is_decompressing = false
 var compression = 0.0
 
 func _ready():
-	name = "Squish"
+	name = "MenuSqusih"
 	pass
 
 func _physics_process(delta):
 	handle_bounce(delta)
 	handle_compression(delta)
 	update_spring_visual()
-	if bounces == 0:
-		if $CanJump.is_colliding():
-			bounces = 7
-			velocity -= velocity * 0.25
+	#if bounces == 0:
+			#bounces = 7
+			#velocity -= velocity * 0.25
 	#move_and_slide()
 
 func handle_bounce(delta):
+	velocity.y += gravity * delta
 	var collison = move_and_collide(velocity * delta)
 	if collison:
-		if not Input.is_action_pressed("ui_select") and bounces >0:
-			bounces -=1
-			$"/root/Global".total_bounces +=1
-			print('collision',min(abs(SPEED)/velocity.y,1))
-			compression = min( 1,max(abs(SPEED)/velocity.y,0))
-			is_decompressing = true
-			velocity.y -= velocity.y*(bounces/10)
-			jump_force -= jump_force * 0.2
-			var reflect = collison.get_remainder().bounce(collison.get_normal())
-			velocity = velocity.bounce(collison.get_normal()) 
-			print(velocity * delta,reflect)
-			move_and_collide(reflect)
+		print('collision',min(abs(SPEED)/velocity.y,1))
+		compression = min( 1,max(abs(SPEED)/velocity.y,0))
+		is_decompressing = true
+		velocity.y -= velocity.y*(0.2)
+		jump_force -= jump_force * 0.2
+		var reflect = collison.get_remainder().bounce(collison.get_normal())
+		velocity = velocity.bounce(collison.get_normal()) 
+		print(velocity * delta,reflect)
+		move_and_collide(reflect)
 		
 			
 					
@@ -72,32 +69,30 @@ func handle_compression(delta):
 			compression = 0
 			is_decompressing = false
 			perform_jump()
-	else:
+	#else:
 		# Apply gravity if not on the floor
-		if not $CanJump.is_colliding():
-			velocity.y += gravity *1.2 * delta
+		#velocity.y += min(gravity *1.2 * delta,800)
 			
 func perform_jump():
-	if $CanJump.is_colliding():
 		print('i jumped',jump_force)
 		velocity.y = jump_force
 		max_compression = 0.9 
 	
 func update_spring_visual():
 	# Scale the sprite based on the compression
-	$Icon.scale = Vector2(rest_height+compression/2,rest_height - compression)
-	$Sprite.scale = Vector2(rest_height+compression/2,rest_height - compression)
+	#$Icon.scale = Vector2(rest_height+compression/2,rest_height - compression)
+	$Sprite2D.scale = Vector2(rest_height+compression/2,rest_height - compression)
 	
 func _input(event):
 	if event.is_action_pressed("ui_select") and not is_compressing and not is_jumping:
 		#if not $CanJump.is_colliding():
 			#velocity.y = move_toward(velocity.y,0,SPEED)
 		is_compressing = true
-	var direction = Input.get_axis("ui_left", "ui_right")
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+	#var direction = Input.get_axis("ui_left", "ui_right")
+	#if direction:
+		#velocity.x = direction * SPEED
+	#else:
+		#velocity.x = move_toward(velocity.x, 0, SPEED)
 	
 	
 	if event.is_action_released("ui_select"):
@@ -108,11 +103,4 @@ func _input(event):
 
 
 
-func _on_area_2d_body_entered(body):
-	print(body.name)
-	if(body.name == 'Squish'):
-		print('you won')
-		$YouWin.show()
-		$YouWin/Bounces.text = str($"/root/Global".total_bounces)
-	pass # Replace with function body.
 

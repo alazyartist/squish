@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://drjoxu67frmt6"]
+[gd_scene load_steps=11 format=3 uid="uid://drjoxu67frmt6"]
 
 [ext_resource type="Texture2D" uid="uid://c118cox53xrjs" path="res://Logo.webp" id="1_3po57"]
 [ext_resource type="Script" path="res://StartMenu.gd" id="1_v8n7x"]
+[ext_resource type="Script" path="res://MenuSquish.gd" id="3_gb2sw"]
+[ext_resource type="Texture2D" uid="uid://bcieynp3576sc" path="res://Squish/squishbody.png" id="4_3xp1d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5jnus"]
 draw_center = false
@@ -38,6 +40,13 @@ Button/styles/focus = SubResource("StyleBoxFlat_5jnus")
 Button/styles/hover = SubResource("StyleBoxFlat_7qd8w")
 Button/styles/normal = SubResource("StyleBoxFlat_svl0y")
 Button/styles/pressed = SubResource("StyleBoxFlat_7qd8w")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mb5ql"]
+custom_solver_bias = 0.07
+radius = 42.15
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mfcew"]
+size = Vector2(345, 111)
 
 [node name="StartMenu" type="CanvasLayer"]
 process_mode = 2
@@ -83,5 +92,31 @@ layout_mode = 2
 theme = SubResource("Theme_f0duy")
 theme_override_font_sizes/font_size = 37
 text = "Start Game"
+
+[node name="Label" type="Label" parent="Container/MarginContainer/CenterContainer/HFlowContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+process_mode = 2
+position = Vector2(1029, 110)
+collision_layer = 130
+collision_mask = 130
+script = ExtResource("3_gb2sw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CircleShape2D_mb5ql")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("4_3xp1d")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(1027, 612)
+collision_layer = 131
+collision_mask = 131
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(22.5, 45.5)
+shape = SubResource("RectangleShape2D_mfcew")
 
 [connection signal="pressed" from="Container/MarginContainer/CenterContainer/HFlowContainer/Button" to="." method="_on_start_pressed"]
